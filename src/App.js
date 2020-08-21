@@ -43,9 +43,9 @@ function componentBuilder() {
     .filter((element) => {
       return element.author.includes("P");
     })
-    .map((element) => {
+    .map((element, i) => {
       return (
-        <ApprovalCard>
+        <ApprovalCard key={i}>
           <CommentDetail
             author={element.author}
             timeAgo={element.timeAgo}
@@ -58,16 +58,20 @@ function componentBuilder() {
 }
 
 // convert to class-based component
-
-function App() {
-  return (
-    <div className="ui container">
-      <ApprovalCard>
-        <p>Are you sure?</p>
-      </ApprovalCard>
-      {componentBuilder()}
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super (props);
+  }
+  render() {
+    return (
+      <div className="ui container">
+        <ApprovalCard>
+          <p>Are you sure?</p>
+        </ApprovalCard>
+        {componentBuilder()}
+      </div>
+    );
+  }
 }
 
 export default App;
